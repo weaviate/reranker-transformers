@@ -1,5 +1,5 @@
-# qna-transformers-models
-The inference container for the qna module
+# cross-ranker-transformers-models
+The inference container for the cross-ranker-transformers module
 
 ## Documentation
 
