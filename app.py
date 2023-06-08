@@ -49,7 +49,7 @@ def meta():
     return meta_config.get()
 
 
-@app.post("/crossrank")
+@app.post("/rerank")
 async def read_item(item: CrossEncoderInput, response: Response):
     logging.info(f"Received request data: {item}")
     print(item)
