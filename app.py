@@ -51,8 +51,6 @@ def meta():
 
 @app.post("/rerank")
 async def read_item(item: CrossEncoderInput, response: Response):
-    logging.info(f"Received request data: {item}")
-    print(item)
     try:
         score = await cross_encoder.do(item)
         return {

@@ -13,10 +13,9 @@ LOCAL_REPO="ce-ranker" MODEL_NAME="cross-encoder/ms-marco-MiniLM-L-6-v2" ./cicd/
 
 ### Local development
 
-Installing `cmake` and `pkg-config` may be required to successfully install all requirements
 ```
-brew install cmake
-brew install pkg-config
+python3 -m venv .venv
+pip3 install -r requirements.txt
 ```
 
 ### Downloading model

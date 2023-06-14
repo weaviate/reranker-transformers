@@ -5,9 +5,6 @@
 
 from sentence_transformers.cross_encoder import CrossEncoder
 from pydantic import BaseModel
-from typing import Optional
-import torch
-from optimum.onnxruntime import ORTModelForQuestionAnswering
 
 class CrossEncoderInput(BaseModel):
     Query: str
