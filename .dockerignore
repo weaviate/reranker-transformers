@@ -1,0 +1,8 @@
+__pycache__
+.models
+.github
+.git
+.venv
+cicd
+requirements-test.txt
+smoke_tests.py
