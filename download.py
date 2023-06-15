@@ -20,3 +20,5 @@ print("Downloading model {} from huggingface model hub".format(model_name))
 # Currently coupling model inference and tokenization in the Sentence Transformers library
 model = CrossEncoder(model_name)
 model.save_pretrained(model_dir)
+
+print("Success")
