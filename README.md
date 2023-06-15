@@ -1,36 +1,66 @@
-# cross-ranker-transformers-models
-The inference container for the cross-ranker-transformers module
+# Cross ranker transformers module
 
-## Documentation
+The inference container for Weaviate's reranker-transformers module
 
-Documentation for this module can be found [here](https://weaviate.io/developers/weaviate/current/reader-generator-modules/qna-transformers.html).
+📚 Documentation
+-----------------
 
-## Build Docker container
+Documentation for this module can be found [here](https://weaviate.io/developers/weaviate/current/reader-generator-modules/reranker-transformers.html).
 
-```
-LOCAL_REPO="ce-ranker" MODEL_NAME="cross-encoder/ms-marco-MiniLM-L-6-v2" ./cicd/build.sh
-```
+📦 Requirements
+----------------
 
-### Local development
+1. Create a new virtual environment
 
-```
+```sh
 python3 -m venv .venv
+source .venv/bin/activate
+```
+
+2. Install all module and test dependencies
+
+```sh
 pip3 install -r requirements.txt
+pip3 install -r requirements-test.txt
 ```
 
-### Downloading model
+3. Download the model locally
 
-Run command: 
-```
+```sh
 MODEL_NAME=cross-encoder/ms-marco-MiniLM-L-6-v2 ./download.py
 ```
 
-### Downloading model with ONNX runtime
-To-Do
+5. Run the inference server
 
-### Running local server
+```sh
+uvicorn app:app --host 0.0.0.0 --port 8000
+```
 
-Run command:
+💡 Testing
+----------
+
+For sanity checks that to check that all works properly you can run our smoke tests against your server
+
+```sh
+python3 smoke_tests.py
 ```
-python3 -m uvicorn app:app --host 0.0.0.0 --port 8000    
+
+🐳 Docker support
+-----------------
+
+In order to build locally a docker image one can run this command in project's root folder
+
+```sh
+LOCAL_REPO="local-ranker" MODEL_NAME="cross-encoder/ms-marco-MiniLM-L-6-v2" ./cicd/build.sh
 ```
+
+In order to test the built docker image run this command in project's root folder
+
+```sh
+LOCAL_REPO="local-ranker" ./cicd/test.sh
+```
+
+🔗 Useful Resources
+--------------------
+
+- [HuggingFace cross-encoder/ms-marco-MiniLM-L-6-v2 model description](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2)
