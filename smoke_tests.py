@@ -3,12 +3,12 @@ import requests
 import time
 
 class SmokeTest(unittest.TestCase):
-    def _waitForStartup(self):
-        url = 'http://localhost:8000/.well-known/ready'
+    def setUp(self):
+        self.url = 'http://localhost:8000'
 
         for i in range(0, 100):
             try:
-                res = requests.get(url)
+                res = requests.get(self.url + '/.well-known/ready')
                 if res.status_code == 204:
                     return
                 else:
@@ -20,8 +20,23 @@ class SmokeTest(unittest.TestCase):
 
         raise Exception("did not start up")
 
-    def testVectorizing(self):
-        self._waitForStartup()
+    def testWellKnownReady(self):
+        res = requests.get(self.url + '/.well-known/ready')
+
+        self.assertEqual(res.status_code, 204)
+
+    def testWellKnownLive(self):
+        res = requests.get(self.url + '/.well-known/live')
+
+        self.assertEqual(res.status_code, 204)
+
+    def testMeta(self):
+        res = requests.get(self.url + '/meta')
+
+        self.assertEqual(res.status_code, 200)
+        self.assertIsInstance(res.json(), dict)
+
+    def testRerank(self):
         url = 'http://localhost:8000/rerank'
 
         req_body = {'Query': 'what is ref2vec?', 'Property': 'content'}
