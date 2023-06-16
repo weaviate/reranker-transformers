@@ -12,17 +12,10 @@ class CrossEncoderInput(BaseModel):
 
 class CrossEncoderRanker:
     model: CrossEncoder
-    cuda: bool
-    cuda_core: str
 
     def __init__(self, model_path: str, cuda_support: bool, cuda_core: str):
-        self.cuda = cuda_support
-        self.cuda_core = cuda_core
-        
-        self.model = CrossEncoder(model_path)
-
-        if self.cuda:
-            self.model.to(self.cuda_core)
+        device = cuda_core if cuda_support else 'cpu'
+        self.model = CrossEncoder(model_path, device=device)
 
     async def do(self, item: CrossEncoderInput):
         # so probably makes sense to separate tokenization and inference in the future
