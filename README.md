@@ -51,13 +51,13 @@ python3 smoke_tests.py
 In order to build locally a docker image one can run this command in project's root folder
 
 ```sh
-LOCAL_REPO="local-ranker" MODEL_NAME="cross-encoder/ms-marco-MiniLM-L-6-v2" ./cicd/build.sh
+LOCAL_REPO="local-reranker" MODEL_NAME="cross-encoder/ms-marco-MiniLM-L-6-v2" ./cicd/build.sh
 ```
 
 In order to test the built docker image run this command in project's root folder
 
 ```sh
-LOCAL_REPO="local-ranker" ./cicd/test.sh
+LOCAL_REPO="local-reranker" ./cicd/test.sh
 ```
 
 🔗 Useful Resources
