@@ -39,13 +39,13 @@ class SmokeTest(unittest.TestCase):
     def testRerank(self):
         url = 'http://localhost:8000/rerank'
 
-        req_body = {'Query': 'what is ref2vec?', 'Property': 'content'}
+        req_body = {'query': 'what is ref2vec?', 'property': 'content'}
         res = requests.post(url, json=req_body)
         resBody = res.json()
 
         self.assertEqual(200, res.status_code)
-        self.assertEqual(resBody['query'], req_body['Query'])
-        self.assertEqual(resBody['property'], req_body['Property'])
+        self.assertEqual(resBody['query'], req_body['query'])
+        self.assertEqual(resBody['property'], req_body['property'])
         self.assertTrue(resBody['score'] != 0)
 
 

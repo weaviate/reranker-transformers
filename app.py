@@ -54,8 +54,8 @@ async def read_item(item: CrossEncoderInput, response: Response):
     try:
         score = await cross_encoder.do(item)
         return {
-            "query": item.Query,
-            "property": item.Property,
+            "query": item.query,
+            "property": item.property,
             "score": score,
         }
     except Exception as e:
