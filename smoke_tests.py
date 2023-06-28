@@ -38,8 +38,14 @@ class SmokeTest(unittest.TestCase):
 
     def testRerank(self):
         url = 'http://localhost:8000/rerank'
+        propertyText = """
+        The ref2Vec-centroid module is used to calculate object vectors based on the centroid of referenced vectors.
+        The idea is that this centroid vector would be calculated from the vectors of an object's references, enabling
+        associations between clusters of objects. This is useful in applications such as making suggestions
+        based on the aggregation of a user's actions or preferences.
+        """
 
-        req_body = {'query': 'what is ref2vec?', 'property': 'content'}
+        req_body = {'query': 'What is ref2vec?', 'property': propertyText}
         res = requests.post(url, json=req_body)
         resBody = res.json()
 
@@ -47,6 +53,7 @@ class SmokeTest(unittest.TestCase):
         self.assertEqual(resBody['query'], req_body['query'])
         self.assertEqual(resBody['property'], req_body['property'])
         self.assertTrue(resBody['score'] != 0)
+        print(f"score: {resBody['score']}")
 
 
 if __name__ == "__main__":

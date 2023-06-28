@@ -15,11 +15,20 @@ jobs:
   build-image:
     name: Build image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - model_name: cross-encoder/ms-marco-MiniLM-L-6-v2
+            model_tag_name: cross-encoder-ms-marco-MiniLM-L-6-v2
+          - model_name: cross-encoder/ms-marco-TinyBERT-L-2-v2
+            model_tag_name: cross-encoder-ms-marco-TinyBERT-L-2-v2
+          - model_name: cross-encoder/ms-marco-MiniLM-L-2-v2
+            model_tag_name: cross-encoder-ms-marco-MiniLM-L-2-v2
     env:
       LOCAL_REPO: reranker-transformers
       REMOTE_REPO: semitechnologies/reranker-transformers
-      MODEL_NAME: cross-encoder/ms-marco-MiniLM-L-6-v2
-      MODEL_TAG_NAME: cross-encoder-ms-marco-MiniLM-L-6-v2
+      MODEL_NAME: ${{matrix.model_name}}
+      MODEL_TAG_NAME: ${{matrix.model_tag_name}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
