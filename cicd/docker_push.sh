@@ -2,12 +2,6 @@
 
 set -eou pipefail
 
-# Docker push rules
-# If on tag (e.g. 1.0.0)
-# - any commit is pushed as :<model>-<semver>
-# - any commit is pushed as :<model>-latest
-# - any commit is pushed as :<model>
-git_hash=
 remote_repo=${REMOTE_REPO?Variable REMOTE_REPO is required}
 docker_username=${DOCKER_USERNAME?Variable DOCKER_USERNAME is required}
 docker_password=${DOCKER_PASSWORD?Variable DOCKER_PASSWORD is required}
@@ -24,8 +18,6 @@ function main() {
 }
 
 function init() {
-  git_hash="$(git rev-parse HEAD | head -c 7)"
-
   docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
   docker buildx create --use
   echo "$docker_password" | docker login -u "$docker_username" --password-stdin
