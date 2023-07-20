@@ -52,12 +52,7 @@ def meta():
 @app.post("/rerank")
 async def read_item(item: CrossEncoderInput, response: Response):
     try:
-        score = await cross_encoder.do(item)
-        return {
-            "query": item.query,
-            "property": item.property,
-            "score": score,
-        }
+        return await cross_encoder.do(item)
     except Exception as e:
         logger.exception(
             f"Something went wrong while scoring the input."
