@@ -1,8 +1,8 @@
 __pycache__
-.models
 .github
 .git
 .venv
 cicd
+models
 requirements-test.txt
 smoke_tests.py
