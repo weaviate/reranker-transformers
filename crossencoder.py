@@ -1,8 +1,3 @@
-# Please note this first version is using the Sentence Transformers library
-# -- such that model inference and toeknization is coupled
-# -- This is likely not optimal compared to i.e. the batch encodign tokenization.
-# -- will fix after getting initial POC together.
-
 from sentence_transformers.cross_encoder import CrossEncoder
 from pydantic import BaseModel
 from typing import Optional
@@ -12,8 +7,8 @@ from threading import Lock
 
 class CrossEncoderInput(BaseModel):
     query: str
-    property: Optional[str]
-    documents: Optional[list[str]]
+    property: Optional[str] = None
+    documents: Optional[list[str]] = None
 
 class DocumentScore(BaseModel):
     document: str
@@ -21,9 +16,9 @@ class DocumentScore(BaseModel):
 
 class CrossEncoderResponse(BaseModel):
     query: str
-    scores: Optional[list[DocumentScore]]
-    property: Optional[str]
-    score: Optional[float]
+    scores: Optional[list[DocumentScore]] = None
+    property: Optional[str] = None
+    score: Optional[float] = None
 
 class CrossEncoderRanker:
     lock: Lock
@@ -54,11 +49,8 @@ class CrossEncoderRanker:
         return CrossEncoderResponse(query=item.query, property=item.property, score=score)
 
     def _rerank(self, item: CrossEncoderInput) -> CrossEncoderResponse:
-        try:
-            self.lock.acquire()
+        with self.lock:
             return self._perform_rerank(item)
-        finally:
-            self.lock.release()
 
     async def do(self, item: CrossEncoderInput):
         return await asyncio.wrap_future(self.executor.submit(self._rerank, item))

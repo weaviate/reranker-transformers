@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
 from sentence_transformers.cross_encoder import CrossEncoder
-# ToDo -- quantize Cross Encoder and separate inference from tokenization
-
-#from optimum.onnxruntime import ORTModelForQuestionAnswering
-#from optimum.onnxruntime.configuration import AutoQuantizationConfig
-#from optimum.onnxruntime import ORTQuantizer 
 import os
 import sys
 
