@@ -5,7 +5,7 @@ The inference container for Weaviate's reranker-transformers module
 📚 Documentation
 -----------------
 
-Documentation for this module can be found [here](https://weaviate.io/developers/weaviate/current/reader-generator-modules/reranker-transformers.html).
+Documentation for this module can be found [here](https://weaviate.io/developers/weaviate/model-providers/transformers/reranker).
 
 📦 Requirements
 ----------------
