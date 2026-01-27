@@ -18,9 +18,11 @@ RUN ./download.py
 
 FROM base_image AS reranker_transformers
 
+ENV PORT=8080
+
 WORKDIR /app
 COPY --from=download_model /app/models /app/models
 COPY . .
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["uvicorn app:app --host 0.0.0.0 --port 8080"]
+CMD ["uvicorn app:app --host 0.0.0.0 --port ${PORT}"]
